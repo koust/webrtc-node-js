@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 57236 }, () => {
+const wss = new WebSocket.Server({ port: (process.env.PORT || 5000) }, () => {
     console.log("Signaling server is now listening on port 8080")
 });
 

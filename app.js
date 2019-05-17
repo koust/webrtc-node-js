@@ -1,8 +1,20 @@
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: (process.env.PORT || 5000) }, () => {
-    console.log("Signaling server is now listening on port 8080")
-});
+// const wss = new WebSocket.Server({ port: (process.env.PORT || 5000) }, () => {
+//     console.log("Signaling server is now listening on port 8080")
+// });
+const express = require('express')
+const http = require('http')
+const WebSocket = require('ws')
+
+const port = process.env.PORT || 8080
+const app = express()
+const httpServer = http.createServer(app)
+const wss = new WebSocket.Server({
+    'server': httpServer
+})
+httpServer.listen(port)
+
 
 // Broadcast to all.
 wss.broadcast = (ws, data) => {
